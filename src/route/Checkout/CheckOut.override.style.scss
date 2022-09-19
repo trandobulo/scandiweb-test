@@ -1,0 +1,71 @@
+.checkOutProgressContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  background: var(--breadcrumbs-background);
+  min-height: var(--breadcrumbs-height);
+}
+
+.line {
+  height: 6px;
+  flex: auto;
+  border-radius: 3px;
+  background-color: var(--cart-page-divider-background);
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: var(--cart-page-divider-background);
+}
+
+.line > div {
+  width: 100%;
+  height: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background-color: var(--button-background);
+}
+
+.circle_red {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: var(--button-background);
+}
+
+.circleSymbol {
+  color: #eeeeee;
+  font-size: 16px;
+  padding-top: 2px;
+}
+
+.circleSymbol_gray {
+  color: #a7a7a7;
+  font-size: 16px;
+  padding-top: 2px;
+}
+
+.checkBox {
+  width: 30px;
+  display: flex;
+  flex-direction: column;
+  top: 6px;
+  overflow: visible;
+}
+
+.checkBoxTitle {
+  width: 100px;
+}
+
+.checkBoxTitle_gray {
+  width: 100px;
+  color: #a7a7a7;
+}
