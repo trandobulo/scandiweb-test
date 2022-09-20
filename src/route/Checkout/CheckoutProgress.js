@@ -2,42 +2,34 @@ class CheckoutProgress extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = { value: 0 };
-
     this.stepMapArr = Object.keys(this.props.stepMap);
   }
 
-  componentDidUpdate() {
-    this.setState({ value: 100 });
-  }
-
-  getStepNumber(checkoutStep) {
+  getStepId(checkoutStep) {
     return this.stepMapArr.findIndex((el) => el === checkoutStep);
   }
 
-  circleSymbol(checkoutStep, count) {
-    if (this.getStepNumber(checkoutStep) < count) {
-      return count;
+  circleSymbol(checkoutStep, blockId) {
+    if (this.getStepId(checkoutStep) < blockId) {
+      return blockId;
     }
     return <>&#10003;</>;
   }
 
   renderCheckOutProgress(checkoutStep, stepMap) {
     const stepArr = [];
-    let count = 1;
+    let blockId = 1;
 
-    const progressBlock = (step, checkoutStep, stepMap, count) => {
-      console.log(this.stepMapArr.length, this.getStepNumber(checkoutStep));
-
-      if (count > this.getStepNumber(checkoutStep) + 1) {
+    const progressBlock = (step, checkoutStep, stepMap, blockId) => {
+      if (blockId > this.getStepId(checkoutStep) + 1) {
         return (
           <>
             <div className="line"></div>
-            {this.stepMapArr.length !== count && (
+            {this.stepMapArr.length !== blockId && (
               <div className="checkBox">
                 <div className="circle">
                   <div className="circleSymbol_gray">
-                    {this.circleSymbol(checkoutStep, count)}
+                    {this.circleSymbol(checkoutStep, blockId)}
                   </div>
                 </div>
                 <div className="checkBoxTitle_gray">{stepMap[step].title}</div>
@@ -50,28 +42,22 @@ class CheckoutProgress extends PureComponent {
       return (
         <>
           <div className="line">
-            {this.getStepNumber(checkoutStep) === count - 1 && (
-              <div
-                style={
-                  count === 1
-                    ? { width: `100%` }
-                    : { width: `${this.state.value}%` }
-                }
-                className="progressAnimated"
-              ></div>
+            {this.getStepId(checkoutStep) + 1 === blockId && (
+              <div className="progressAnimated"></div>
             )}
-            {this.getStepNumber(checkoutStep) !== count - 1 && (
+
+            {this.getStepId(checkoutStep) + 1 > blockId && (
               <div className="progress"></div>
             )}
           </div>
-          {this.stepMapArr.length !== count && (
+          {this.stepMapArr.length !== blockId && (
             <div className="checkBox">
               <div className="circle_red">
                 <div className="circleSymbol">
-                  {this.circleSymbol(checkoutStep, count)}
+                  {this.circleSymbol(checkoutStep, blockId)}
                 </div>
               </div>
-              <div className="checkBoxTitle_gray">{stepMap[step].title}</div>
+              <div className="checkBoxTitle">{stepMap[step].title}</div>
             </div>
           )}
         </>
@@ -79,8 +65,8 @@ class CheckoutProgress extends PureComponent {
     };
 
     for (let step in stepMap) {
-      stepArr.push(progressBlock(step, checkoutStep, stepMap, count));
-      count++;
+      stepArr.push(progressBlock(step, checkoutStep, stepMap, blockId));
+      blockId++;
     }
 
     return <div className="checkOutProgressContainer">{stepArr}</div>;

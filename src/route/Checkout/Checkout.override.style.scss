@@ -1,8 +1,15 @@
+.Checkout {
+  &::before {
+    @include after-mobile {
+      content: none;
+    }
+  }
+}
+
 .checkOutProgressContainer {
   display: flex;
   width: 100%;
-  height: 75px;
-  top: -42px;
+  height: 100px;
   align-items: center;
   background: var(--breadcrumbs-background);
   min-height: var(--breadcrumbs-height);
@@ -32,8 +39,18 @@
   height: 6px;
   border-radius: 3px;
   background-color: var(--button-background);
-  transition: 5s ease;
+  transition: 1s ease;
   transition-delay: 0.5s;
+  animation: progress 1s;
+}
+
+@keyframes progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 .progress {
@@ -57,28 +74,32 @@
 .circleSymbol {
   color: #eeeeee;
   font-size: 16px;
-  padding-top: 2px;
+  line-height: 0%;
+  top: 2px;
 }
 
 .circleSymbol_gray {
   color: #a7a7a7;
   font-size: 16px;
-  padding-top: 2px;
+  top: 2px;
 }
 
 .checkBox {
   width: 30px;
   display: flex;
   flex-direction: column;
-  top: 6px;
+  align-items: center;
+  top: 9px;
   overflow: visible;
 }
 
 .checkBoxTitle {
-  width: 100px;
+  width: max-content;
+  margin-top: 5px;
 }
 
 .checkBoxTitle_gray {
-  width: 100px;
+  width: max-content;
   color: #a7a7a7;
+  margin-top: 5px;
 }
